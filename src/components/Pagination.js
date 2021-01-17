@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 export default function Pagination({launchesperpage,totalLaunches,paginate}) {
     const pageNumbers=[];
@@ -11,7 +12,7 @@ export default function Pagination({launchesperpage,totalLaunches,paginate}) {
          { 
            pageNumbers.map(number=>(
             <li key={number} className="page-item"> 
-               <a href="#" className="page-link" onClick={()=>paginate(number)}>{number}</a>
+               <Link to="#" className="page-link" onClick={()=>paginate(number)}>{number}</Link>
             </li>      
           ))
          }

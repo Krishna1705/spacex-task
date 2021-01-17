@@ -1,4 +1,8 @@
-import { LAUNCHES_REQUEST,LAUNCHES_SUCCESS,LAUNCHES_FAIL,LAUNCH_DETAIL_SUCCESS,LAUNCH_DETAIL_REQUEST,LAUNCH_DETAIL_FAIL } from '../constants/launchesConstants';
+import { 
+         LAUNCHES_REQUEST,LAUNCHES_SUCCESS,LAUNCHES_FAIL,
+         LAUNCH_DETAIL_SUCCESS,LAUNCH_DETAIL_REQUEST,LAUNCH_DETAIL_FAIL, 
+         LAUNCH_UPCOMING_SUCCESS, LAUNCH_UPCOMING_REQUEST,LAUNCH_UPCOMING_FAIL, LAUNCH_PAST_SUCCESS, LAUNCH_PAST_REQUEST, LAUNCH_PAST_FAIL
+       } from '../constants/launchesConstants';
 
 
 export const launchesListReducer=(state={loading:true,error:null,launches:[]},action)=>{
@@ -39,4 +43,42 @@ export const launchDetailReducer=(state={launch:{},error:null,loading:true},acti
                                         }
           default:return state;
        }
+}
+
+export const launchesUpcomingReducer=(state={upcomingLaunches:[],loadingUpcoming:true,errorUpcoming:null},action)=>{
+    switch(action.type){
+        case LAUNCH_UPCOMING_REQUEST:return{
+                                                ...state,
+                                                loadingUpcoming:true
+                                            }
+        case LAUNCH_UPCOMING_SUCCESS:return{
+                                                ...state,
+                                                loadingUpcoming:false,
+                                                upcomingLaunches:action.payload
+                                            }
+       case LAUNCH_UPCOMING_FAIL:return{
+                                                loadingUpcoming:false,
+                                                errorUpcoming:action.payload
+                                            }
+        default:return state;
+    }
+}
+
+export const launchesPastReducer=(state={pastLaunches:[],loadingPast:true,errorPast:null},action)=>{
+      switch(action.type){
+          case LAUNCH_PAST_REQUEST:return{
+                                        ...state,
+                                        loadingPast:true
+                                    }
+          case LAUNCH_PAST_SUCCESS:return{
+                                            ...state,
+                                            loadingPast:false,
+                                            pastLaunches:action.payload
+                                        }
+          case LAUNCH_PAST_FAIL:return{      
+                                          loadingPast:false,
+                                          errorPast:action.payload
+                                       }
+          default:return state
+      }
 }

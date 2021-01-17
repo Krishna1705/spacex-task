@@ -3,7 +3,8 @@ import Launches from '../components/Launches';
 import LoadingBox from '../components/LoadingBox';
 
 import Pagination from '../components/Pagination';
-import {Container,Row,Col,Alert} from 'react-bootstrap';
+import {Container,Row,Col,Alert,Button, Jumbotron} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 import {useSelector,useDispatch} from 'react-redux';
 import {listLaunches} from '../actions/launchesActions';
@@ -23,7 +24,7 @@ export default function HomePage() {
 
      useEffect(()=>{
         dispatch(listLaunches());
-    },[])
+    },[dispatch])
     
 
 //get current launches
@@ -57,6 +58,22 @@ const paginate=(Number)=>{
 
                    </Col>
                 </Row>
+
+                <Jumbotron>
+                    <Row className="justify-content-md-center">
+                        <Col>
+                          <Link to="/upcomingLaunches"><Button variant="info">View Upcoming Launches</Button></Link>
+                        </Col>
+                        <Col>
+                          <Link to="/pastLaunches"><Button variant="info">View Past Launches</Button></Link>
+                        </Col>
+                        <Col>
+                        <Button variant="info">View Launches from Start & End Date</Button>
+                        </Col>
+                    </Row>
+                </Jumbotron>
+
+                <br/>
              </Container>
             </div>
         </div>

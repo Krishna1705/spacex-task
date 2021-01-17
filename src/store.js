@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 
 import thunk from 'redux-thunk'
-import { launchesListReducer,launchDetailReducer } from "./reducers/launchesReducers";
+import { launchesListReducer,launchDetailReducer,launchesUpcomingReducer,launchesPastReducer } from "./reducers/launchesReducers";
 
 const INIITIAL_STATE={};
 
@@ -12,7 +12,9 @@ const INIITIAL_STATE={};
 } */
 const reducer=combineReducers({
     launchesList:launchesListReducer,
-    launchItemDetail:launchDetailReducer
+    launchItemDetail:launchDetailReducer,
+    launchesUpcomingList:launchesUpcomingReducer,
+    launchesPastList:launchesPastReducer
 })
 //with help of following line we can see our store inside redux dev tools in chrome dev tools
 const composeEnhancer=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
