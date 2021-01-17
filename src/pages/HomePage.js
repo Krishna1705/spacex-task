@@ -2,9 +2,8 @@ import React,{useState,useEffect} from 'react';
 import Launches from '../components/Launches';
 import LoadingBox from '../components/LoadingBox';
 
-//import axios from 'axios';
 import Pagination from '../components/Pagination';
-import { Container,Row,Col} from 'react-bootstrap';
+import {Container,Row,Col,Alert} from 'react-bootstrap';
 
 import {useSelector,useDispatch} from 'react-redux';
 import {listLaunches} from '../actions/launchesActions';
@@ -44,24 +43,22 @@ const paginate=(Number)=>{
 
          <div>
              <div>
-            <Container>
+             <Container>
                 <Row>
                     <Col>
 
-         { loading?
-                   (<LoadingBox></LoadingBox>)
-                 :  
-                   (
-                       <Launches launches={currentLaunches}></Launches>
-                    )
-         }
-         <Pagination launchesperpage={launchesperpage} totalLaunches={launches.length} paginate={paginate}></Pagination>
+                        { loading?(<LoadingBox></LoadingBox>):  
+                          error?(<Alert variant='danger'>{error}</Alert>):
+                                (
+                                    <Launches launches={currentLaunches}></Launches>
+                                )
+                        }
+                        <Pagination launchesperpage={launchesperpage} totalLaunches={launches.length} paginate={paginate}></Pagination>
 
-         
-         </Col>
+                   </Col>
                 </Row>
-            </Container>
-        </div>
+             </Container>
+            </div>
         </div>
         </>
     )

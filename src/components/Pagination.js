@@ -11,7 +11,7 @@ export default function Pagination({launchesperpage,totalLaunches,paginate}) {
          { 
            pageNumbers.map(number=>(
             <li key={number} className="page-item"> 
-               <a href="!#" className="page-link" onClick={()=>paginate(number)}>{number}</a>
+               <a href="#" className="page-link" onClick={()=>paginate(number)}>{number}</a>
             </li>      
           ))
          }
