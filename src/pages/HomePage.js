@@ -2,31 +2,32 @@ import React,{useState,useEffect} from 'react';
 import Launches from '../components/Launches';
 import LoadingBox from '../components/LoadingBox';
 
-import axios from 'axios';
+//import axios from 'axios';
 import Pagination from '../components/Pagination';
 import { Container,Row,Col} from 'react-bootstrap';
 
+import {useSelector,useDispatch} from 'react-redux';
+import {listLaunches} from '../actions/launchesActions';
 
 export default function HomePage() {
-    const [launches,setLaunches]=useState([]);
-    const [loading,setLoading]=useState(false);
+
+    //code for pagination
     const [currentpage,setCurrentpage]=useState(1);
-    const [launchesperpage,setLaunchesperpage]=useState(10);
+    const [launchesperpage]=useState(10);
+    
+     //to dispatch an action from view component to the redux store we use useDispatch() hook
+     const dispatch = useDispatch();
+     //to gain  state info from redux store we use useSelector Hook
+     const launchesList=useSelector((state)=>state.launchesList);
+     let {loading,launches,error}=launchesList;
     
 
-    useEffect(()=>{
-        const fetchLaunches=async()=>{
-             setLoading(true);
-             const launchesdata=await axios.get('https://api.spacexdata.com/v3/launches');
-             console.log(launchesdata.data);
-             const data=launchesdata.data;
-             setLoading(false);
-             setLaunches(data);
-        }
-        fetchLaunches();
+     useEffect(()=>{
+        dispatch(listLaunches());
     },[])
+    
 
-   //get current launches
+//get current launches
 
 const indexOfLastPage=currentpage*launchesperpage;//1*10=10
 const indexOfFirstPage= indexOfLastPage-launchesperpage;//10-10=0
