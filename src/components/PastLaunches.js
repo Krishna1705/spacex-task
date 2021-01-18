@@ -19,8 +19,6 @@ export default function PastLaunches() {
                                     dispatch(launchDetail(item.flight_number))
                                    };
     
-    const launchItemDetail=useSelector(state=>state.launchItemDetail);
-    const {launch,loading,error}=launchItemDetail;
     //-----code for launch detail ends here---
 
     useEffect(()=>{
@@ -29,7 +27,7 @@ export default function PastLaunches() {
     return (
         <>
         <Container>
-          <h3>All Past Launches</h3>
+          <h3 className='mb-3'>All Past Launches</h3>
             <Row className="justify-content-md-center">
              <Col>
                 {
@@ -66,9 +64,8 @@ export default function PastLaunches() {
                     )
                 }
 
-                <ViewModal show={show} onHide={closeModal} 
-                               closeModal={closeModal} launch={launch} 
-                               loading={loading} error={error} >
+                <ViewModal show={show} 
+                           closeModal={closeModal} >
                 </ViewModal>
              </Col>
             </Row>

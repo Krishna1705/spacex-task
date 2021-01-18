@@ -1,11 +1,19 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import {useSelector} from 'react-redux';
+
 import {Modal,Alert,Button} from 'react-bootstrap';
 import LoadingBox from './LoadingBox';
 
-export default function ViewModal({launch,loading,error,closeModal,show,onHide}) {
+
+export default function ViewModal({show,closeModal}) {
+     
+    const launchItemDetail=useSelector(state=>state.launchItemDetail);
+    const {launch,loading,error}=launchItemDetail;
+ 
+
     return (
         <div>
-             <Modal show={show} onHide={closeModal} >
+             <Modal show={show} onHide={closeModal}  backdrop="static" keyboard={false} >
                         <Modal.Header closeButton>
                         <Modal.Title>Mission Detail</Modal.Title>
                         </Modal.Header>
@@ -25,7 +33,7 @@ export default function ViewModal({launch,loading,error,closeModal,show,onHide})
                       
                             <Modal.Footer>
                                 
-                                <Button variant="info" onClick={closeModal}>
+                                <Button variant="dark" onClick={closeModal}>
                                     Close
                                 </Button>
                             

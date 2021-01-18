@@ -3,17 +3,18 @@ import Launches from '../components/Launches';
 import LoadingBox from '../components/LoadingBox';
 
 import Pagination from '../components/Pagination';
-import {Container,Row,Col,Alert,Button, Jumbotron} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Container,Row,Col,Alert} from 'react-bootstrap';
+
 
 import {useSelector,useDispatch} from 'react-redux';
 import {listLaunches} from '../actions/launchesActions';
+import FilterLaunches from '../components/FilterLaunches';
 
 export default function HomePage() {
 
     //code for pagination
-    const [currentpage,setCurrentpage]=useState(1);
-    const [launchesperpage]=useState(10);
+    const [currentPage,setCurrentPage]=useState(1);
+    const [launchesPerPage]=useState(10);
     
      //to dispatch an action from view component to the redux store we use useDispatch() hook
      const dispatch = useDispatch();
@@ -29,14 +30,14 @@ export default function HomePage() {
 
 //get current launches
 
-const indexOfLastPage=currentpage*launchesperpage;//1*10=10
-const indexOfFirstPage= indexOfLastPage-launchesperpage;//10-10=0
+const indexOfLastPage=currentPage*launchesPerPage;//1*10=10
+const indexOfFirstPage= indexOfLastPage-launchesPerPage;//10-10=0
 const currentLaunches=launches.slice(indexOfFirstPage,indexOfLastPage)
 
 // paginate function here
 
 const paginate=(Number)=>{
-    setCurrentpage(Number)
+    setCurrentPage(Number)
 }
 
     return (
@@ -54,26 +55,14 @@ const paginate=(Number)=>{
                                     <Launches launches={currentLaunches}></Launches>
                                 )
                         }
-                        <Pagination launchesperpage={launchesperpage} totalLaunches={launches.length} paginate={paginate}></Pagination>
+                        <Pagination size="sm" launchesPerPage={launchesPerPage} totalLaunches={launches.length} paginate={paginate}></Pagination>
 
                    </Col>
                 </Row>
 
-                <Jumbotron>
-                    <Row className="justify-content-md-center">
-                        <Col>
-                          <Link to="/upcomingLaunches"><Button variant="info">View Upcoming Launches</Button></Link>
-                        </Col>
-                        <Col>
-                          <Link to="/pastLaunches"><Button variant="info">View Past Launches</Button></Link>
-                        </Col>
-                        <Col>
-                        <Button variant="info">View Launches from Start & End Date</Button>
-                        </Col>
-                    </Row>
-                </Jumbotron>
+                    <FilterLaunches/>
 
-                <br/>
+               
              </Container>
             </div>
         </div>

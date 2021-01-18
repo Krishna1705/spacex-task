@@ -19,9 +19,7 @@ export default function UpcomingLaunches() {
                                     setShow(true);
                                     dispatch(launchDetail(item.flight_number))
                                    };
-    
-    const launchItemDetail=useSelector(state=>state.launchItemDetail);
-    const {launch,loading,error}=launchItemDetail;
+   
    // -----launch detail code for modal ends----
 
     useEffect(()=>{
@@ -32,7 +30,7 @@ export default function UpcomingLaunches() {
         <>
           <div>
             <Container>
-              <h3>All Upcoming Launches</h3>
+              <h3 className='mb-3'>All Upcoming Launches</h3>
                 <Row className="justify-content-md-center">
                     <Col>
                     {
@@ -70,9 +68,8 @@ export default function UpcomingLaunches() {
                      
                     </Col>
                     
-                    <ViewModal show={show} onHide={closeModal} 
-                               closeModal={closeModal} launch={launch} 
-                               loading={loading} error={error} >
+                    <ViewModal show={show} 
+                               closeModal={closeModal} >
                     </ViewModal>
 
                 </Row>

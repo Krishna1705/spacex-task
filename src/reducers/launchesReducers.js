@@ -1,7 +1,9 @@
 import { 
          LAUNCHES_REQUEST,LAUNCHES_SUCCESS,LAUNCHES_FAIL,
          LAUNCH_DETAIL_SUCCESS,LAUNCH_DETAIL_REQUEST,LAUNCH_DETAIL_FAIL, 
-         LAUNCH_UPCOMING_SUCCESS, LAUNCH_UPCOMING_REQUEST,LAUNCH_UPCOMING_FAIL, LAUNCH_PAST_SUCCESS, LAUNCH_PAST_REQUEST, LAUNCH_PAST_FAIL
+         LAUNCH_UPCOMING_SUCCESS, LAUNCH_UPCOMING_REQUEST,LAUNCH_UPCOMING_FAIL,
+         LAUNCH_PAST_SUCCESS, LAUNCH_PAST_REQUEST, LAUNCH_PAST_FAIL, 
+         LAUNCH_DATE_SUCCESS, LAUNCH_DATE_REQUEST,LAUNCH_DATE_FAIL
        } from '../constants/launchesConstants';
 
 
@@ -81,4 +83,24 @@ export const launchesPastReducer=(state={pastLaunches:[],loadingPast:true,errorP
                                        }
           default:return state
       }
+}
+
+export const launchesByDateReducer=(state={dateLaunches:[],loadingDate:false,errorDate:null},action)=>{
+    switch(action.type){
+        case LAUNCH_DATE_REQUEST:return{
+                                         ...state,
+                                         loadingDate:true
+                                        }
+        case LAUNCH_DATE_SUCCESS:return{
+                                        ...state,
+                                        loadingDate:false,
+                                        dateLaunches:action.payload
+                                       }
+        case LAUNCH_DATE_FAIL:return{
+                                        ...state,
+                                        loadingDate:false,
+                                        errorDate:action.payload
+                                    }
+        default:return state
+    }
 }

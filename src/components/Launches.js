@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {Table,Button} from 'react-bootstrap';
-import {useDispatch,useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {launchDetail} from '../actions/launchesActions';
 
 import ViewModal from './ViewModal';
@@ -16,13 +16,10 @@ export default function Launches({launches}) {
                                     setShow(true);
                                     dispatch(launchDetail(item.flight_number))
                                    };
-
-    const launchItemDetail=useSelector(state=>state.launchItemDetail);
-    const {launch,loading,error}=launchItemDetail;
 //--------launch deatil code ends here----
     return (
         <>
-               <h3>All Launches</h3>
+               <h3 className='mb-3'>All Launches</h3>
                         <div>
                             <Table responsive="sm">
                                 <thead>
@@ -53,9 +50,8 @@ export default function Launches({launches}) {
                             </Table>
                         </div>
                           
-                    <ViewModal show={show} onHide={closeModal} 
-                               closeModal={closeModal} launch={launch} 
-                               loading={loading} error={error} >
+                    <ViewModal show={show}
+                               closeModal={closeModal}>
                     </ViewModal>
                         
 

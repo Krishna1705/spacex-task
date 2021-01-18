@@ -1,14 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-export default function Pagination({launchesperpage,totalLaunches,paginate}) {
+export default function Pagination({launchesPerPage,totalLaunches,paginate}) {
     const pageNumbers=[];
-    for(let i=1;i<=Math.ceil(totalLaunches/launchesperpage);i++){
+    for(let i=1;i<=Math.ceil(totalLaunches/launchesPerPage);i++){
         pageNumbers.push(i);
     }
     return (
         <nav>
-        <ul className="pagination">
+        <ul className="pagination" >
          { 
            pageNumbers.map(number=>(
             <li key={number} className="page-item"> 

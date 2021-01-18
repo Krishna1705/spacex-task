@@ -4,6 +4,7 @@ import {
         LAUNCH_DETAIL_FAIL,LAUNCH_DETAIL_REQUEST,LAUNCH_DETAIL_SUCCESS,
         LAUNCH_UPCOMING_REQUEST,LAUNCH_UPCOMING_SUCCESS,LAUNCH_UPCOMING_FAIL,
         LAUNCH_PAST_REQUEST,LAUNCH_PAST_SUCCESS,LAUNCH_PAST_FAIL,
+        LAUNCH_DATE_REQUEST,LAUNCH_DATE_SUCCESS,LAUNCH_DATE_FAIL
        } from '../constants/launchesConstants';
 
 export const listLaunches=()=>async (dispatch)=>{
@@ -47,5 +48,17 @@ export const launchesPast=()=>async(dispatch)=>{
      dispatch({type:LAUNCH_PAST_SUCCESS,payload:data});
     }catch(error){
      dispatch({type:LAUNCH_PAST_FAIL,payload:error.message});
+    }
+}
+
+export const launchesByDate=(startDateString,endDateString)=>async(dispatch)=>{
+    console.log(startDateString);
+    console.log(endDateString);
+    dispatch({type:LAUNCH_DATE_REQUEST});
+    try{
+       const {data}=await Axios.get(`https://api.spacexdata.com/v3/launches?start=${startDateString}&end=${endDateString}`);
+       dispatch({type:LAUNCH_DATE_SUCCESS,payload:data});
+    }catch(error){
+        dispatch({type:LAUNCH_DATE_FAIL,payload:error.message})
     }
 }
