@@ -41,7 +41,7 @@ export default function DateLaunchesList() {
                         <tbody>
                                                     
                          {
-                            dateLaunches.length<1?(<Alert variant="secondary" className="mt-2">Please enter valid dates to view the launches. No Launch is available between these dates.</Alert>):
+                            dateLaunches.length<1?(<Alert variant="danger" className="mt-2">Please enter valid dates to view the launches. No Launch is available between these dates.</Alert>):
                             dateLaunches.map((item)=>(
                                                 <tr key={item.flight_number}>
                                                     
