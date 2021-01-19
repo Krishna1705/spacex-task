@@ -27,7 +27,7 @@ export default function DateLaunchesList() {
        {
             loadingDate?(<LoadingBox></LoadingBox>):
             errorDate?(<Alert variant="danger">{errorDate}</Alert>):
-            
+            dateLaunches.length<1?(<Alert variant="danger" className="mt-2">Please enter valid dates to view the launches. No Launch is available between these dates.</Alert>):
             (
               <div>
                     <Table responsive="sm">
@@ -38,10 +38,8 @@ export default function DateLaunchesList() {
                                 <th>Information</th>    
                             </tr>
                         </thead>
-                        <tbody>
-                                                    
-                         {
-                            dateLaunches.length<1?(<Alert variant="danger" className="mt-2">Please enter valid dates to view the launches. No Launch is available between these dates.</Alert>):
+                        <tbody>                  
+                         {      
                             dateLaunches.map((item)=>(
                                                 <tr key={item.flight_number}>
                                                     
