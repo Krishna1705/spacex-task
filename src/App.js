@@ -5,8 +5,7 @@ import {BrowserRouter,Route} from 'react-router-dom';
 import UpcomingLaunches from './components/UpcomingLaunches';
 import PastLaunches from './components/PastLaunches';
 import DateLaunches from './components/DateLaunches';
-import ViewModal from './components/ViewModal';
-import DateLaunchesList from './components/DateLaunchesList';
+
 
 
 function App() {

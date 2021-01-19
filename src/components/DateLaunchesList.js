@@ -30,31 +30,31 @@ export default function DateLaunchesList() {
             
             (
               <div>
-                                        <Table responsive="sm">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Flight No</th>
-                                                        <th>Mission Name</th>
-                                                        <th>Information</th>    
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {
-                                                        dateLaunches===null?(<p>Any Launch is Not Available between this dates.</p>):
-                                                        dateLaunches.map((item)=>(
-
-                                                            <tr key={item.flight_number}>
+                    <Table responsive="sm">
+                        <thead>
+                            <tr>
+                                <th>Flight No</th>
+                                <th>Mission Name</th>
+                                <th>Information</th>    
+                            </tr>
+                        </thead>
+                        <tbody>
                                                     
-                                                                <td>{item.flight_number}</td>
-                                                                <td>{item.mission_name}</td>
-                                                                <td><Button variant="info"  onClick={()=>{viewModal({item})}}>View</Button>{' '}</td>
+                         {
+                            dateLaunches.length<1?(<Alert variant="secondary" className="mt-2">Please enter valid dates to view the launches. No Launch is available between these dates.</Alert>):
+                            dateLaunches.map((item)=>(
+                                                <tr key={item.flight_number}>
+                                                    
+                                                 <td>{item.flight_number}</td>
+                                                 <td>{item.mission_name}</td>
+                                                 <td><Button variant="info"  onClick={()=>{viewModal({item})}}>View</Button>{' '}</td>
                                     
-                                                           </tr>
-                                                        ) )
+                                                </tr>
+                                                ) )
                                                     
-                                                    }
-                                                    </tbody>
-                                                </Table>
+                         }
+                        </tbody>
+                    </Table>
                 </div>   
             )
           }

@@ -12,10 +12,6 @@ import FilterLaunches from '../components/FilterLaunches';
 
 export default function HomePage() {
 
-    //code for pagination
-    const [currentPage,setCurrentPage]=useState(1);
-    const [launchesPerPage]=useState(10);
-    
      //to dispatch an action from view component to the redux store we use useDispatch() hook
      const dispatch = useDispatch();
      //to gain  state info from redux store we use useSelector Hook
@@ -27,19 +23,48 @@ export default function HomePage() {
         dispatch(listLaunches());
     },[dispatch])
     
+/*------------------------------pagination code starts here-------------------- */    
 
+//code for pagination
+const [currentPage,setCurrentPage]=useState(1);
+const [launchesPerPage]=useState(10);
+    
 //get current launches
 
 const indexOfLastPage=currentPage*launchesPerPage;//1*10=10
 const indexOfFirstPage= indexOfLastPage-launchesPerPage;//10-10=0
 const currentLaunches=launches.slice(indexOfFirstPage,indexOfLastPage)
 
+//code to limit the page numbers
+const [pageNumberLimit]=useState(5);
+const [maxPageNumberLimit,setMaxPageNumberLimit]=useState(5);
+const [minPageNumberLimit,setMinPageNumberLimit]=useState(0);
+
 // paginate function here
 
 const paginate=(Number)=>{
     setCurrentPage(Number)
 }
+//next btn handle
+const handleNext=()=>{
+    setCurrentPage(currentPage+1);
+    if(currentPage+1>maxPageNumberLimit){
+        setMaxPageNumberLimit(maxPageNumberLimit+pageNumberLimit);
+        setMinPageNumberLimit(minPageNumberLimit+pageNumberLimit);
+    }
+}
 
+//prev btn handle
+const handlePrev=()=>{
+    setCurrentPage(currentPage-1);
+
+    if((currentPage-1)%pageNumberLimit===0){
+        setMaxPageNumberLimit(maxPageNumberLimit-pageNumberLimit);
+        setMinPageNumberLimit(minPageNumberLimit-pageNumberLimit);
+    }
+}
+
+/*------------------------------pagination code ends here-------------------- */
     return (
        <>
 
@@ -55,14 +80,21 @@ const paginate=(Number)=>{
                                     <Launches launches={currentLaunches}></Launches>
                                 )
                         }
-                        <Pagination size="sm" launchesPerPage={launchesPerPage} totalLaunches={launches.length} paginate={paginate}></Pagination>
+                        <Pagination size="sm" 
+                                    launchesPerPage={launchesPerPage} 
+                                    totalLaunches={launches.length} 
+                                    paginate={paginate}
+                                    maxPageNumberLimit={maxPageNumberLimit}
+                                    minPageNumberLimit={minPageNumberLimit}
+                                    handleNext={handleNext}
+                                    handlePrev={handlePrev}
+                                    currentPage={currentPage}>
+
+                        </Pagination>
 
                    </Col>
                 </Row>
-
-                    <FilterLaunches/>
-
-               
+                    <FilterLaunches/>               
              </Container>
             </div>
         </div>
